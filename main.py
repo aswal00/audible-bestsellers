@@ -43,12 +43,12 @@ def get_book_datas(file_name):
         for book in books_list:
             try:
                 name = book.find_element(By.CSS_SELECTOR, "h3 a").text
-                writer = book.find_element(By.CLASS_NAME, "authorLabel").text
-                narrator = book.find_element(By.CLASS_NAME, "narratorLabel").text
-                duration = book.find_element(By.CLASS_NAME, "runtimeLabel").text
-                release_date = book.find_element(By.CLASS_NAME, "releaseDateLabel").text
-                lang = book.find_element(By.CLASS_NAME, "languageLabel").text
-                ratings = book.find_element(By.CLASS_NAME, "ratingsLabel").text
+                writer = book.find_element(By.CLASS_NAME, "authorLabel").text.split(":")[-1].strip()
+                narrator = book.find_element(By.CLASS_NAME, "narratorLabel").text.split(":")[-1].strip()
+                duration = book.find_element(By.CLASS_NAME, "runtimeLabel").text.split(":")[-1].strip()
+                release_date = book.find_element(By.CLASS_NAME, "releaseDateLabel").text.split(":")[-1].strip()
+                lang = book.find_element(By.CLASS_NAME, "languageLabel").text.split(":")[-1].strip()
+                ratings = book.find_element(By.CLASS_NAME, "ratingsLabel").text.split(" ")[0].strip()
                 names.append(name)
                 writers.append(writer)
                 narrators.append(narrator)
@@ -90,4 +90,5 @@ for category in category_list[::-1]:
     category_name.click()
     time.sleep(8)
     get_book_datas(f"Audible Top Sellers in {category}")
+
 
